@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        APIManager.sharedInstance.setupClarifai()
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +21,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func buttonClicked(_ sender: Any) {
+        
+        APIManager.sharedInstance.searchImage()
+    }
 
 }
 
