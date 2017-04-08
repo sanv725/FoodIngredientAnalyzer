@@ -1,0 +1,6 @@
+framework module Pods_FoodIngredientAnalyzer {
+  umbrella header "Pods-FoodIngredientAnalyzer-umbrella.h"
+
+  export *
+  module * { export * }
+}
