@@ -42,6 +42,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         picker.dismiss(animated: true, completion: nil)
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
 
+        //APIManager.sharedInstance.searchImage(image: image!)
         APIManager.sharedInstance.imageUpload(image: image!)
         APIManager.sharedInstance.imageDelete(deleteHash: "tULLA1xzTyxEMdF")
         

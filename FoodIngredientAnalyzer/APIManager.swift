@@ -63,9 +63,11 @@ class APIManager {
             case .success:
                 if let json = response.result.value as? [String: Any], let data = json["data"] as? [String: Any] {
                     print("JSON: \(json)")
-                    let deleteHash = data["deletehash"]
+                    let deleteHash = data["deletehash"] as! String
+                    let link = data["link"] as! String
+                    self.searchByImageUrl(urlString: link, deleteHash: deleteHash)
                     print(deleteHash)
-                    self.imageDelete(deleteHash: deleteHash as! String)
+                    
                 }
                 
             case .failure(let error):
@@ -74,11 +76,9 @@ class APIManager {
         }
     }
     
-    func searchImage(image: UIImage) {
+    func searchByImage(image: UIImage) {
         
         let userImage = ClarifaiImage.init(image: image)
-        
-        //let image = ClarifaiImage.init(url: "https://cdn.pixabay.com/photo/2015/04/08/13/13/food-712665_960_720.jpg")
         
         if let _image = userImage {
             foodModel?.predict(on: [_image], completion: { (response, error) in
@@ -97,5 +97,26 @@ class APIManager {
     func setupClarifai() {
         createAccessToken()
         createModel()
+    }
+    
+    func searchByImageUrl(urlString: String, deleteHash: String) {
+
+        let image = ClarifaiImage.init(url: urlString)
+        
+        if let _image = image {
+            foodModel?.predict(on: [_image], completion: { (response, error) in
+                if let concepts = response?.first?.concepts {
+                    for concept in concepts {
+                        print(concept.conceptName)
+                        print(concept.score)
+                    }
+                }
+                print(response)
+                print(error)
+                
+                self.imageDelete(deleteHash: deleteHash)
+            })
+        }
+        
     }
 }
