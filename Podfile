@@ -8,5 +8,6 @@ target 'FoodIngredientAnalyzer' do
   # Pods for FoodIngredientAnalyzer
 
   pod 'Clarifai'
+  pod 'Alamofire'
 
 end
