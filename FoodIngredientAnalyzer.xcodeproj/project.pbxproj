@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		71FF814E65793913F3CC2415 /* Pods_FoodIngredientAnalyzer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4D59F872F0AD9C51A2699EA /* Pods_FoodIngredientAnalyzer.framework */; };
 		E31AFFC21E98AA830014A9D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31AFFC11E98AA830014A9D5 /* AppDelegate.swift */; };
-		E31AFFC41E98AA830014A9D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31AFFC31E98AA830014A9D5 /* ViewController.swift */; };
+		E31AFFC41E98AA830014A9D5 /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31AFFC31E98AA830014A9D5 /* FoodViewController.swift */; };
 		E31AFFC71E98AA830014A9D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31AFFC51E98AA830014A9D5 /* Main.storyboard */; };
 		E31AFFC91E98AA830014A9D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E31AFFC81E98AA830014A9D5 /* Assets.xcassets */; };
 		E31AFFCC1E98AA830014A9D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E31AFFCA1E98AA830014A9D5 /* LaunchScreen.storyboard */; };
 		E31AFFD41E98AD670014A9D5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31AFFD31E98AD670014A9D5 /* APIManager.swift */; };
+		E31AFFD61E9B315F0014A9D5 /* PublicFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31AFFD51E9B315F0014A9D5 /* PublicFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,12 +22,13 @@
 		A4D59F872F0AD9C51A2699EA /* Pods_FoodIngredientAnalyzer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodIngredientAnalyzer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E31AFFBE1E98AA830014A9D5 /* FoodIngredientAnalyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodIngredientAnalyzer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E31AFFC11E98AA830014A9D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E31AFFC31E98AA830014A9D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E31AFFC31E98AA830014A9D5 /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
 		E31AFFC61E98AA830014A9D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E31AFFC81E98AA830014A9D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E31AFFCB1E98AA830014A9D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E31AFFCD1E98AA830014A9D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E31AFFD31E98AD670014A9D5 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		E31AFFD51E9B315F0014A9D5 /* PublicFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicFunctions.swift; sourceTree = "<group>"; };
 		FBBAD96B875F150BC1D20F33 /* Pods-FoodIngredientAnalyzer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodIngredientAnalyzer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodIngredientAnalyzer/Pods-FoodIngredientAnalyzer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,12 +74,13 @@
 			isa = PBXGroup;
 			children = (
 				E31AFFC11E98AA830014A9D5 /* AppDelegate.swift */,
-				E31AFFC31E98AA830014A9D5 /* ViewController.swift */,
+				E31AFFC31E98AA830014A9D5 /* FoodViewController.swift */,
 				E31AFFC51E98AA830014A9D5 /* Main.storyboard */,
 				E31AFFC81E98AA830014A9D5 /* Assets.xcassets */,
 				E31AFFCA1E98AA830014A9D5 /* LaunchScreen.storyboard */,
 				E31AFFCD1E98AA830014A9D5 /* Info.plist */,
 				E31AFFD31E98AD670014A9D5 /* APIManager.swift */,
+				E31AFFD51E9B315F0014A9D5 /* PublicFunctions.swift */,
 			);
 			path = FoodIngredientAnalyzer;
 			sourceTree = "<group>";
@@ -216,8 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E31AFFD41E98AD670014A9D5 /* APIManager.swift in Sources */,
-				E31AFFC41E98AA830014A9D5 /* ViewController.swift in Sources */,
+				E31AFFC41E98AA830014A9D5 /* FoodViewController.swift in Sources */,
 				E31AFFC21E98AA830014A9D5 /* AppDelegate.swift in Sources */,
+				E31AFFD61E9B315F0014A9D5 /* PublicFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

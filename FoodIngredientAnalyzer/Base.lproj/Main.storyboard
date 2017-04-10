@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Food View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FoodIngredientAnalyzer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="FoodViewController" customModule="FoodIngredientAnalyzer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,20 +22,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YG7-WT-Wc3">
-                                <rect key="frame" x="156" y="238" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H1X-BL-k7m"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sg-tO-J5v">
+                                <rect key="frame" x="0.0" y="334" width="375" height="333"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwS-QO-Iex">
+                                <rect key="frame" x="8" y="80" width="359" height="527"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZa-Re-vxO">
+                                        <rect key="frame" x="161" y="30" width="36" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.70588235290000001" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YZa-Re-vxO" firstAttribute="centerX" secondItem="uwS-QO-Iex" secondAttribute="centerX" id="pkz-kR-g2E"/>
+                                    <constraint firstItem="YZa-Re-vxO" firstAttribute="top" secondItem="uwS-QO-Iex" secondAttribute="top" constant="30" id="xKO-du-GFG"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JyP-f3-Cgu">
+                                <rect key="frame" x="165" y="62" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="59V-vW-QTk"/>
+                                    <constraint firstAttribute="width" constant="45" id="hCt-vb-oqF"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCK-vs-zvY">
+                                <rect key="frame" x="0.0" y="80" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.77647058823529413" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add what you have eaten" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tos-Vv-Xbk">
+                                <rect key="frame" x="20" y="157" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="O6Y-lT-cqf"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3sg-tO-J5v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7nW-qE-qcM"/>
+                            <constraint firstItem="gCK-vs-zvY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="E13-5r-fse"/>
+                            <constraint firstItem="gCK-vs-zvY" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="IqZ-cs-JyS"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uwS-QO-Iex" secondAttribute="bottom" constant="60" id="JuD-0d-V2x"/>
+                            <constraint firstItem="uwS-QO-Iex" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="PsG-9i-4Ah"/>
+                            <constraint firstItem="3sg-tO-J5v" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="R2B-4f-MZS"/>
+                            <constraint firstItem="JyP-f3-Cgu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="42" id="Yvr-LY-5Nd"/>
+                            <constraint firstAttribute="trailing" secondItem="uwS-QO-Iex" secondAttribute="trailing" constant="8" id="aoV-n9-z74"/>
+                            <constraint firstItem="3sg-tO-J5v" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="bhU-bE-Cun"/>
+                            <constraint firstItem="Tos-Vv-Xbk" firstAttribute="top" secondItem="JyP-f3-Cgu" secondAttribute="bottom" constant="50" id="c7g-I2-wkj"/>
+                            <constraint firstAttribute="trailing" secondItem="Tos-Vv-Xbk" secondAttribute="trailing" constant="20" id="cyF-kw-MCr"/>
+                            <constraint firstItem="uwS-QO-Iex" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="l67-EG-IT8"/>
+                            <constraint firstItem="Tos-Vv-Xbk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="m79-Jm-oBv"/>
+                            <constraint firstItem="gCK-vs-zvY" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="pyR-PM-iig"/>
+                            <constraint firstItem="JyP-f3-Cgu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rxY-K6-b2B"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3sg-tO-J5v" secondAttribute="bottom" id="wJu-nA-bLr"/>
+                            <constraint firstItem="gCK-vs-zvY" firstAttribute="top" secondItem="uwS-QO-Iex" secondAttribute="top" id="yzq-OK-B7A"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addFoodTextField" destination="Tos-Vv-Xbk" id="ijE-E9-YtU"/>
+                        <outlet property="centerView" destination="uwS-QO-Iex" id="J3Z-zE-Wyv"/>
+                        <outlet property="clockIcon" destination="JyP-f3-Cgu" id="LDb-2W-DuX"/>
+                        <outlet property="shadowView" destination="gCK-vs-zvY" id="Lvb-Jt-uEV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="clockIcon" width="84" height="62"/>
+    </resources>
 </document>
