@@ -16,7 +16,9 @@ class FoodViewController: UIViewController {
     @IBOutlet weak var addFoodSearchBar: UISearchBar!
     @IBOutlet weak var addFoodTextField: UITextField!
     @IBOutlet weak var shadowView: UIView!
+    
     var userImage = UIImage()
+    var ingredientList = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,10 +66,9 @@ extension FoodViewController {
         if segue.identifier == "foodViewToPredictionListSegue" {
             if let destinationViewController = (segue.destination as? UINavigationController)?.topViewController as? PredictionListTableViewController {
                 destinationViewController.delegate = self
-                destinationViewController.predictionList.append(("beef", false))
-                destinationViewController.predictionList.append(("rice", false))
-                destinationViewController.predictionList.append(("chicken", false))
-
+                for ingredient in ingredientList {
+                    destinationViewController.predictionList.append((ingredient, false))
+                }
             }
         }
     }
@@ -87,25 +88,25 @@ extension FoodViewController: UITextFieldDelegate {
 
 extension FoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func cameraButtonClick() {
-        self.performSegue(withIdentifier: "foodViewToPredictionListSegue", sender: self)
-
-//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-//            let imagePicker = UIImagePickerController()
-//            imagePicker.delegate = self
-//            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-//            imagePicker.allowsEditing = false
-//            self.present(imagePicker, animated: true, completion: nil)
-//        }
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
 
-        //APIManager.sharedInstance.searchImage(image: image!)
-        //APIManager.sharedInstance.imageUpload(image: image!, completion: {
-            self.performSegue(withIdentifier: "foodViewToPredictionListSegue", sender: self)
-        //})
+        APIManager.sharedInstance.imageUpload(image: image!, completion: { urlString, deleteHash in
+            APIManager.sharedInstance.searchByImageUrl(urlString: urlString, deleteHash: deleteHash, completion: { ingredientList in
+                self.ingredientList = ingredientList
+                self.performSegue(withIdentifier: "foodViewToPredictionListSegue", sender: self)
+            })
+        })
     }
 }
 

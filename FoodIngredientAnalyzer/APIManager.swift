@@ -53,7 +53,7 @@ class APIManager {
         }
     }
     
-    func imageUpload(image: UIImage, completion: @escaping () -> Void) {
+    func imageUpload(image: UIImage, completion: @escaping (_ urlString: String, _ deleteHash: String) -> Void) {
         let url = "https://api.imgur.com/3/upload.json"
         let imgData: Data = UIImageJPEGRepresentation(image, 1)!
         let encodedData = imgData.base64EncodedString()
@@ -62,12 +62,9 @@ class APIManager {
             switch response.result {
             case .success:
                 if let json = response.result.value as? [String: Any], let data = json["data"] as? [String: Any] {
-                    print("JSON: \(json)")
                     let deleteHash = data["deletehash"] as! String
                     let link = data["link"] as! String
-                    self.searchByImageUrl(urlString: link, deleteHash: deleteHash, completion: {
-                        completion()
-                    })
+                    completion(link, deleteHash)
                     print(deleteHash)
                 }
                 
@@ -100,23 +97,17 @@ class APIManager {
         createModel()
     }
     
-    func searchByImageUrl(urlString: String, deleteHash: String, completion: @escaping () -> Void) {
+    func searchByImageUrl(urlString: String, deleteHash: String, completion: @escaping (_ ingredientList: [String]) -> Void) {
 
         let image = ClarifaiImage.init(url: urlString)
         
         if let _image = image {
             foodModel?.predict(on: [_image], completion: { (response, error) in
-                if let concepts = response?.first?.concepts {
-                    for concept in concepts {
-                        print(concept.conceptName)
-                        print(concept.score)
-                    }
-                }
-                print(response)
-                print(error)
-                
                 self.imageDelete(deleteHash: deleteHash)
-                completion()
+                if let concepts = response?.first?.concepts {
+                    let ingredients: [String] = concepts.filter{ $0.score >= 0.70 }.map{ $0.conceptName }
+                    completion(ingredients)
+                }
             })
         }
         
