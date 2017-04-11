@@ -59,6 +59,18 @@ extension FoodViewController {
         addFoodTextField.backgroundColor = UIColorFromRGB("F7F6F7")
         addFoodTextField.textAlignment = .center
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "foodViewToPredictionListSegue" {
+            if let destinationViewController = (segue.destination as? UINavigationController)?.topViewController as? PredictionListTableViewController {
+                destinationViewController.delegate = self
+                destinationViewController.predictionList.append(("beef", false))
+                destinationViewController.predictionList.append(("rice", false))
+                destinationViewController.predictionList.append(("chicken", false))
+
+            }
+        }
+    }
 }
 
 extension FoodViewController: UITextFieldDelegate {
@@ -75,13 +87,15 @@ extension FoodViewController: UITextFieldDelegate {
 
 extension FoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func cameraButtonClick() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
+        self.performSegue(withIdentifier: "foodViewToPredictionListSegue", sender: self)
+
+//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+//            let imagePicker = UIImagePickerController()
+//            imagePicker.delegate = self
+//            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+//            imagePicker.allowsEditing = false
+//            self.present(imagePicker, animated: true, completion: nil)
+//        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -89,6 +103,18 @@ extension FoodViewController: UIImagePickerControllerDelegate, UINavigationContr
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
 
         //APIManager.sharedInstance.searchImage(image: image!)
-        APIManager.sharedInstance.imageUpload(image: image!)
+        //APIManager.sharedInstance.imageUpload(image: image!, completion: {
+            self.performSegue(withIdentifier: "foodViewToPredictionListSegue", sender: self)
+        //})
     }
+}
+
+extension FoodViewController: SelectedIngredientsDelegate {
+    func selectedIngredients(ingredients: [String]) {
+        print(ingredients)
+    }
+}
+
+protocol SelectedIngredientsDelegate {
+    func selectedIngredients(ingredients: [String])
 }

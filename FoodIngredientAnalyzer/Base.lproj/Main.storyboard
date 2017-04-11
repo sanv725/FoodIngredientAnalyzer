@@ -90,11 +90,71 @@
                         <outlet property="centerView" destination="uwS-QO-Iex" id="J3Z-zE-Wyv"/>
                         <outlet property="clockIcon" destination="JyP-f3-Cgu" id="LDb-2W-DuX"/>
                         <outlet property="shadowView" destination="gCK-vs-zvY" id="Lvb-Jt-uEV"/>
+                        <segue destination="Gir-Cy-Z7f" kind="presentation" identifier="foodViewToPredictionListSegue" id="u8B-qJ-22y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+            <point key="canvasLocation" x="79" y="18"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iPq-Jv-8nO">
+            <objects>
+                <navigationController id="Gir-Cy-Z7f" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VGl-t5-4UT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Q9a-sw-dra" kind="relationship" relationship="rootViewController" id="byz-3b-jBi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HyI-vG-Evk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="938" y="18"/>
+        </scene>
+        <!--Prediction List Table View Controller-->
+        <scene sceneID="Com-x8-I7n">
+            <objects>
+                <tableViewController id="Q9a-sw-dra" customClass="PredictionListTableViewController" customModule="FoodIngredientAnalyzer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ApC-b6-CVZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="predictionCell" id="OAK-va-6aY">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAK-va-6aY" id="zrY-Sj-8PS">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Q9a-sw-dra" id="oef-Oi-nHw"/>
+                            <outlet property="delegate" destination="Q9a-sw-dra" id="o9B-U7-aYF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="a0A-rn-kua">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="tLT-Lj-zfu">
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="Q9a-sw-dra" id="YoB-98-Nzy"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="KsB-jT-8hQ">
+                            <connections>
+                                <action selector="saveButtonClicked:" destination="Q9a-sw-dra" id="taG-jb-Bmt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="KsB-jT-8hQ" id="XGK-1k-sP6"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZu-86-C35" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1846" y="18"/>
         </scene>
     </scenes>
     <resources>

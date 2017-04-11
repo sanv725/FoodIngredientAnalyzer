@@ -53,7 +53,7 @@ class APIManager {
         }
     }
     
-    func imageUpload(image: UIImage) {
+    func imageUpload(image: UIImage, completion: @escaping () -> Void) {
         let url = "https://api.imgur.com/3/upload.json"
         let imgData: Data = UIImageJPEGRepresentation(image, 1)!
         let encodedData = imgData.base64EncodedString()
@@ -65,9 +65,10 @@ class APIManager {
                     print("JSON: \(json)")
                     let deleteHash = data["deletehash"] as! String
                     let link = data["link"] as! String
-                    self.searchByImageUrl(urlString: link, deleteHash: deleteHash)
+                    self.searchByImageUrl(urlString: link, deleteHash: deleteHash, completion: {
+                        completion()
+                    })
                     print(deleteHash)
-                    
                 }
                 
             case .failure(let error):
@@ -99,7 +100,7 @@ class APIManager {
         createModel()
     }
     
-    func searchByImageUrl(urlString: String, deleteHash: String) {
+    func searchByImageUrl(urlString: String, deleteHash: String, completion: @escaping () -> Void) {
 
         let image = ClarifaiImage.init(url: urlString)
         
@@ -115,6 +116,7 @@ class APIManager {
                 print(error)
                 
                 self.imageDelete(deleteHash: deleteHash)
+                completion()
             })
         }
         
