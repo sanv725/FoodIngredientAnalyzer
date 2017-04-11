@@ -7,23 +7,43 @@
 //
 
 import UIKit
-
+import HTagView
 
 class FoodViewController: UIViewController {
     
     @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var clockIcon: UIImageView!
-    @IBOutlet weak var addFoodSearchBar: UISearchBar!
     @IBOutlet weak var addFoodTextField: UITextField!
     @IBOutlet weak var shadowView: UIView!
+    @IBOutlet weak var tagView: HTagView!
     
     var userImage = UIImage()
     var ingredientList = [String]()
+    var selectedIngredients = [String]() {
+        didSet {
+            tagView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         applyTheme()
+        
+        tagView.delegate = self
+        tagView.dataSource = self
+        tagView.multiselect = false
+        tagView.marg = 20
+        tagView.btwTags = 20
+        tagView.btwLines = 20
+        tagView.fontSize = 15
+        tagView.tagMainBackColor = UIColor(red: 121/255, green: 196/255, blue: 1, alpha: 1)
+        tagView.tagMainTextColor = UIColor.white
+        tagView.tagSecondBackColor = UIColor.lightGray
+        tagView.tagSecondTextColor = UIColor.darkText
+        tagView.tagContentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        
+        tagView.reloadData()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
@@ -86,6 +106,27 @@ extension FoodViewController: UITextFieldDelegate {
     }
 }
 
+extension FoodViewController: HTagViewDelegate, HTagViewDataSource {
+    // MARK: - HTagViewDataSource
+    func numberOfTags(_ tagView: HTagView) -> Int {
+        return selectedIngredients.count
+    }
+    
+    func tagView(_ tagView: HTagView, titleOfTagAtIndex index: Int) -> String {
+        return selectedIngredients[index]
+    }
+    
+    func tagView(_ tagView: HTagView, tagTypeAtIndex index: Int) -> HTagType {
+        return .cancel
+    }
+    
+    // MARK: - HTagViewDelegate
+    func tagView(_ tagView: HTagView, didCancelTagAtIndex index: Int) {
+        selectedIngredients.remove(at: index)
+        tagView.reloadData()
+    }
+}
+
 extension FoodViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func cameraButtonClick() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
@@ -112,7 +153,7 @@ extension FoodViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 extension FoodViewController: SelectedIngredientsDelegate {
     func selectedIngredients(ingredients: [String]) {
-        print(ingredients)
+        selectedIngredients = ingredients
     }
 }
 

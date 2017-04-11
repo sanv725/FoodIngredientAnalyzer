@@ -17,16 +17,19 @@ PODS:
   - Alamofire (4.4.0)
   - Clarifai (2.2.0):
     - AFNetworking (~> 3.1)
+  - HTagView (2.1.1)
 
 DEPENDENCIES:
   - Alamofire
   - Clarifai
+  - HTagView
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Clarifai: f9747e7e7460159f639faa184b2ac2d793d01fa4
+  HTagView: 1fd0b80e7a9326fbe22e2a6a7c8b3230baaff8b8
 
-PODFILE CHECKSUM: 6d5b2ab3c4cb647c6d8c93f8994a64aa9025a931
+PODFILE CHECKSUM: b41b70dfb671a7caaa953ae0f89b2097c9a0307f
 
 COCOAPODS: 1.2.0

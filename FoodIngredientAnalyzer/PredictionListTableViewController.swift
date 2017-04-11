@@ -20,13 +20,16 @@ class PredictionListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         title = "Ingredient List"
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonClicked))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonClicked))
     }
     
-    @IBAction func cancelButtonClicked(_ sender: Any) {
+    func cancelButtonClicked() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveButtonClicked(_ sender: Any) {
+    func saveButtonClicked() {
         delegate?.selectedIngredients(ingredients: predictionList.filter{ $0.selected }.map{ $0.name } )
         self.dismiss(animated: true, completion: nil)
     }
