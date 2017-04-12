@@ -13,9 +13,7 @@ class PredictionListTableViewController: UITableViewController {
     var predictionList = [(name: String, selected: Bool)]()
     
     var delegate: SelectedIngredientsDelegate?
-    
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +35,7 @@ class PredictionListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "predictionCell", for: indexPath)
         cell.textLabel?.text = predictionList[indexPath.row].name
+        cell.tintColor = UIColorFromRGB("00B4A7")
         return cell
     }
     

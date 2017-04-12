@@ -8,14 +8,15 @@
 
 import UIKit
 import HTagView
+import SVProgressHUD
 
 class FoodViewController: UIViewController {
     
     @IBOutlet weak var centerView: UIView!
     @IBOutlet weak var clockIcon: UIImageView!
     @IBOutlet weak var addFoodTextField: UITextField!
-    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var tagView: HTagView!
+    @IBOutlet weak var searchResultTableView: UITableView!
     
     var userImage = UIImage()
     var ingredientList = [String]()
@@ -24,28 +25,33 @@ class FoodViewController: UIViewController {
             tagView.reloadData()
         }
     }
+    
+    let searchResults: [String] = ["Ham", "Eggplant", "Lettuce", "Lime", "Olive"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         applyTheme()
-        
+
         tagView.delegate = self
         tagView.dataSource = self
         tagView.multiselect = false
         tagView.marg = 20
         tagView.btwTags = 20
         tagView.btwLines = 20
-        tagView.fontSize = 15
-        tagView.tagMainBackColor = UIColor(red: 121/255, green: 196/255, blue: 1, alpha: 1)
-        tagView.tagMainTextColor = UIColor.white
-        tagView.tagSecondBackColor = UIColor.lightGray
-        tagView.tagSecondTextColor = UIColor.darkText
+        tagView.fontSize = 12
+        tagView.tagMainBackColor = UIColorFromRGB("F7F6F7")
+        tagView.tagMainTextColor = UIColor.darkGray
         tagView.tagContentEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         
         tagView.reloadData()
         
+        searchResultTableView.isHidden = true
+        searchResultTableView.delegate = self
+        searchResultTableView.dataSource = self
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
     }
 
@@ -77,7 +83,6 @@ extension FoodViewController {
     
     func dismissKeyboard() {
         self.view.endEditing(true)
-        shadowView.isHidden = true
         addFoodTextField.backgroundColor = UIColorFromRGB("F7F6F7")
         addFoodTextField.textAlignment = .center
     }
@@ -94,15 +99,41 @@ extension FoodViewController {
     }
 }
 
+extension FoodViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
+        cell.textLabel?.text = searchResults[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if !selectedIngredients.contains(searchResults[indexPath.row]) {
+            selectedIngredients.append(searchResults[indexPath.row])
+            tagView.reloadData()
+        }
+        searchResultTableView.isHidden = true
+        addFoodTextField.endEditing(true)
+    }
+}
+
 extension FoodViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        shadowView.isHidden = false
-        textField.backgroundColor = .white
         textField.textAlignment = .left
         textField.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 0)
         var rightViewFrame = textField.rightView?.frame
         rightViewFrame?.size.width = 90
         textField.rightView?.frame = rightViewFrame!
+        searchResultTableView.isHidden = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        searchResultTableView.isHidden = true
     }
 }
 
@@ -142,8 +173,11 @@ extension FoodViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker.dismiss(animated: true, completion: nil)
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
 
+        SVProgressHUD.show(withStatus: "Uploading image...")
         APIManager.sharedInstance.imageUpload(image: image!, completion: { urlString, deleteHash in
+            SVProgressHUD.show(withStatus: "Predicting ingredients...")
             APIManager.sharedInstance.searchByImageUrl(urlString: urlString, deleteHash: deleteHash, completion: { ingredientList in
+                SVProgressHUD.dismiss()
                 self.ingredientList = ingredientList
                 self.performSegue(withIdentifier: "foodViewToPredictionListSegue", sender: self)
             })
@@ -151,9 +185,18 @@ extension FoodViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
+extension FoodViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let isDescendant = (touch.view?.isDescendant(of: searchResultTableView)), isDescendant {
+            return false
+        }
+        return true
+    }
+}
+
 extension FoodViewController: SelectedIngredientsDelegate {
     func selectedIngredients(ingredients: [String]) {
-        selectedIngredients = ingredients
+        selectedIngredients.append(contentsOf: ingredients)
     }
 }
 

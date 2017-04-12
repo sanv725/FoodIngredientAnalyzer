@@ -57,13 +57,13 @@ class APIManager {
         let url = "https://api.imgur.com/3/upload.json"
         let imgData: Data = UIImageJPEGRepresentation(image, 1)!
         let encodedData = imgData.base64EncodedString()
-
+        
         Alamofire.request(url, method: .post, parameters: ["image": encodedData], headers: headers).responseJSON { (response) in
             switch response.result {
             case .success:
                 if let json = response.result.value as? [String: Any], let data = json["data"] as? [String: Any] {
-                    let deleteHash = data["deletehash"] as! String
-                    let link = data["link"] as! String
+                    let deleteHash = data["deletehash"] as? String ?? ""
+                    let link = data["link"] as? String ?? ""
                     completion(link, deleteHash)
                     print(deleteHash)
                 }
@@ -86,8 +86,6 @@ class APIManager {
                         print(concept.score)
                     }
                 }
-                print(response)
-                print(error)
             })
         }
     }
@@ -105,7 +103,7 @@ class APIManager {
             foodModel?.predict(on: [_image], completion: { (response, error) in
                 self.imageDelete(deleteHash: deleteHash)
                 if let concepts = response?.first?.concepts {
-                    let ingredients: [String] = concepts.filter{ $0.score >= 0.70 }.map{ $0.conceptName }
+                    let ingredients: [String] = concepts.filter{ $0.score >= 0.70 }.map{ $0.conceptName.capitalized }
                     completion(ingredients)
                 }
             })

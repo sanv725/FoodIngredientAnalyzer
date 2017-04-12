@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sg-tO-J5v">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sg-tO-J5v" userLabel="BottomView">
                                 <rect key="frame" x="0.0" y="334" width="375" height="333"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -49,15 +49,34 @@
                                     <constraint firstAttribute="width" constant="45" id="hCt-vb-oqF"/>
                                 </constraints>
                             </imageView>
-                            <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCK-vs-zvY">
-                                <rect key="frame" x="0.0" y="80" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.77647058823529413" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-c5-5jh" customClass="HTagView" customModule="HTagView">
-                                <rect key="frame" x="21" y="228" width="333" height="211"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vr-UE-Ogm">
+                                <rect key="frame" x="20" y="217" width="335" height="370"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-c5-5jh" customClass="HTagView" customModule="HTagView">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q6s-yk-jJc" customClass="UITableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="kTw-xg-t76"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="5YR-c5-5jh" secondAttribute="bottom" id="3jV-ZP-HOy"/>
+                                    <constraint firstItem="5YR-c5-5jh" firstAttribute="top" secondItem="5vr-UE-Ogm" secondAttribute="top" id="7FW-c7-JlH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q6s-yk-jJc" secondAttribute="trailing" id="DIA-ow-vAX"/>
+                                    <constraint firstItem="5YR-c5-5jh" firstAttribute="leading" secondItem="5vr-UE-Ogm" secondAttribute="leading" id="GAp-0A-xbo"/>
+                                    <constraint firstItem="Q6s-yk-jJc" firstAttribute="leading" secondItem="5vr-UE-Ogm" secondAttribute="leading" id="LXg-7j-axF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q6s-yk-jJc" secondAttribute="bottom" id="MFW-nJ-BQ3"/>
+                                    <constraint firstAttribute="trailing" secondItem="5YR-c5-5jh" secondAttribute="trailing" id="Quu-QJ-1aW"/>
+                                    <constraint firstItem="Q6s-yk-jJc" firstAttribute="centerX" secondItem="5vr-UE-Ogm" secondAttribute="centerX" id="gCV-qk-bmh"/>
+                                    <constraint firstItem="Q6s-yk-jJc" firstAttribute="top" secondItem="5vr-UE-Ogm" secondAttribute="top" id="iBS-7s-y8J"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="tVz-9A-Gj0"/>
+                                </constraints>
+                            </scrollView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add what you have eaten" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tos-Vv-Xbk">
                                 <rect key="frame" x="20" y="157" width="335" height="40"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,8 +91,7 @@
                         <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3sg-tO-J5v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7nW-qE-qcM"/>
-                            <constraint firstItem="gCK-vs-zvY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="E13-5r-fse"/>
-                            <constraint firstItem="gCK-vs-zvY" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="IqZ-cs-JyS"/>
+                            <constraint firstItem="5vr-UE-Ogm" firstAttribute="top" secondItem="Tos-Vv-Xbk" secondAttribute="bottom" constant="20" id="Jtg-hl-rR3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uwS-QO-Iex" secondAttribute="bottom" constant="60" id="JuD-0d-V2x"/>
                             <constraint firstItem="uwS-QO-Iex" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="PsG-9i-4Ah"/>
                             <constraint firstItem="3sg-tO-J5v" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="R2B-4f-MZS"/>
@@ -84,17 +102,18 @@
                             <constraint firstAttribute="trailing" secondItem="Tos-Vv-Xbk" secondAttribute="trailing" constant="20" id="cyF-kw-MCr"/>
                             <constraint firstItem="uwS-QO-Iex" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="l67-EG-IT8"/>
                             <constraint firstItem="Tos-Vv-Xbk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="m79-Jm-oBv"/>
-                            <constraint firstItem="gCK-vs-zvY" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="pyR-PM-iig"/>
+                            <constraint firstItem="5vr-UE-Ogm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="m9S-ri-jo1"/>
+                            <constraint firstAttribute="trailing" secondItem="5vr-UE-Ogm" secondAttribute="trailing" constant="20" id="njq-FU-3Js"/>
                             <constraint firstItem="JyP-f3-Cgu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rxY-K6-b2B"/>
+                            <constraint firstAttribute="bottom" secondItem="5vr-UE-Ogm" secondAttribute="bottom" constant="80" id="tSW-wv-m9k"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3sg-tO-J5v" secondAttribute="bottom" id="wJu-nA-bLr"/>
-                            <constraint firstItem="gCK-vs-zvY" firstAttribute="top" secondItem="uwS-QO-Iex" secondAttribute="top" id="yzq-OK-B7A"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addFoodTextField" destination="Tos-Vv-Xbk" id="ijE-E9-YtU"/>
                         <outlet property="centerView" destination="uwS-QO-Iex" id="J3Z-zE-Wyv"/>
                         <outlet property="clockIcon" destination="JyP-f3-Cgu" id="LDb-2W-DuX"/>
-                        <outlet property="shadowView" destination="gCK-vs-zvY" id="Lvb-Jt-uEV"/>
+                        <outlet property="searchResultTableView" destination="Q6s-yk-jJc" id="fhE-gL-2B9"/>
                         <outlet property="tagView" destination="5YR-c5-5jh" id="FxR-2o-0SN"/>
                         <segue destination="Gir-Cy-Z7f" kind="presentation" identifier="foodViewToPredictionListSegue" id="u8B-qJ-22y"/>
                     </connections>

@@ -10,5 +10,6 @@ target 'FoodIngredientAnalyzer' do
   pod 'Alamofire'
   pod 'Clarifai'
   pod 'HTagView'
+  pod 'SVProgressHUD'
 
 end
