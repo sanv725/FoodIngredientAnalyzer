@@ -4,4 +4,4 @@ This is a prototype project to display what the implementation of food ingredien
 
 While not implemented in this prototype, it's possible to improve the food model used by Clarifai by sending over any new ingredients that the user adds that weren't in the prediction list as additional feedback using the Clarifai's API for that food. 
 
-![](http://i.imgur.com/kBHttgj.gif?2)
+![](http://i.imgur.com/HD40QKA.gif?1)
